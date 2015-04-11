@@ -32,8 +32,8 @@ public class ChangesetStore extends HttpService {
   private URL baseURL;
 
   /**
-   * @param baseURL
-   * @throws MalformedURLException
+   * @param baseURL a string with baseURL
+   * @throws MalformedURLException a exception throwed whether can't create the URL
    */
   public void setBaseURL(String baseURL) throws MalformedURLException {
     setBaseURL(new URL(baseURL));
@@ -59,8 +59,9 @@ public class ChangesetStore extends HttpService {
   /**
    * DO NOT FORGET TO CLOSE THE READER!
    *
-   * @param sequenceNumber
-   * @return
+   * @param sequenceNumber a sequence to be restrieved
+   * @return a Reader instance
+   * @see Reader
    * @throws Exception
    */
   public Reader getChangeset(int sequenceNumber) throws Exception {
