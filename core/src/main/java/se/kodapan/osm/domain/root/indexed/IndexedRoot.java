@@ -18,115 +18,122 @@ import java.util.Set;
  */
 public abstract class IndexedRoot<Query> extends AbstractRoot {
 
-  public static Class<IndexedRoot> factoryClass;
+    public static Class<IndexedRoot> factoryClass;
 
-  public static IndexedRoot newInstance(Root decorated) {
-    return newInstance(decorated, null);
-  }
+    public static IndexedRoot newInstance(Root decorated) {
+        return newInstance(decorated, null);
+    }
 
-  /**
-   * @return a new instance depending on underlying OS. E.g. Android or Java.
-   */
-  public static IndexedRoot newInstance(Root decorated, File directory) {
-    synchronized (IndexedRoot.class) {
-      if (factoryClass == null) {
-        try {
-          factoryClass = (Class<IndexedRoot>) Class.forName(IndexedRoot.class.getName() + "Impl");
-        } catch (ClassNotFoundException e) {
-          throw new RuntimeException(e);
+    /**
+     *
+     * @param decorated RootClass
+     * @param directory directory of the file
+     * @return a new instance depending on underlying OS. E.g. Android or Java.
+     * @see IndexedRoot
+     */
+    public static IndexedRoot newInstance(Root decorated, File directory) {
+        synchronized (IndexedRoot.class) {
+            if (factoryClass == null) {
+                try {
+                    factoryClass = (Class<IndexedRoot>) Class.forName(IndexedRoot.class.getName() + "Impl");
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
-      }
+        try {
+            if (directory != null) {
+                return factoryClass.getConstructor(Root.class, File.class).newInstance(decorated, directory);
+            } else {
+                return factoryClass.getConstructor(Root.class).newInstance(decorated);
+            }
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
-    try {
-      if (directory != null) {
-        return factoryClass.getConstructor(Root.class, File.class).newInstance(decorated, directory);
-      } else {
-        return factoryClass.getConstructor(Root.class).newInstance(decorated);
-      }
-    } catch (InstantiationException e) {
-      throw new RuntimeException(e);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException(e);
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException(e);
-    } catch (InvocationTargetException e) {
-      throw new RuntimeException(e);
+
+    public abstract QueryFactories<Query> getQueryFactories();
+
+    private Root decorated;
+
+    protected IndexedRoot(Root decorated) {
+        this.decorated = decorated;
     }
-  }
 
-  public abstract QueryFactories<Query> getQueryFactories();
+    @Override
+    public Enumerator<Node> enumerateNodes() {
+        return decorated.enumerateNodes();
+    }
 
-  private Root decorated;
+    @Override
+    public Enumerator<Way> enumerateWays() {
+        return decorated.enumerateWays();
+    }
 
-  protected IndexedRoot(Root decorated) {
-    this.decorated = decorated;
-  }
+    @Override
+    public Enumerator<Relation> enumerateRelations() {
+        return decorated.enumerateRelations();
+    }
 
-  @Override
-  public Enumerator<Node> enumerateNodes() {
-    return decorated.enumerateNodes();
-  }
+    @Override
+    public Node getNode(long identity) {
+        return decorated.getNode(identity);
+    }
 
-  @Override
-  public Enumerator<Way> enumerateWays() {
-    return decorated.enumerateWays();
-  }
+    @Override
+    public Way getWay(long identity) {
+        return decorated.getWay(identity);
+    }
 
-  @Override
-  public Enumerator<Relation> enumerateRelations() {
-    return decorated.enumerateRelations();
-  }
+    @Override
+    public Relation getRelation(long identity) {
+        return decorated.getRelation(identity);
+    }
 
-  @Override
-  public Node getNode(long identity) {
-    return decorated.getNode(identity);
-  }
+    @Override
+    /**
+     * Should also remove this object and update all affected objects in index.
+     */
+    public abstract Set<OsmObject> remove(OsmObject osmObject);
 
-  @Override
-  public Way getWay(long identity) {
-    return decorated.getWay(identity);
-  }
+    @Override
+    /**
+     * Should also update this object and all affected objects in index.
+     */
+    public abstract void add(OsmObject osmObject);
 
-  @Override
-  public Relation getRelation(long identity) {
-    return decorated.getRelation(identity);
-  }
+    /**
+     * Reconstructs the whole index from scratch.
+     *
+     * @param numberOfThreads number of threads used to write to index
+     * @throws IOException
+     */
+    public abstract void reconstruct(int numberOfThreads) throws IOException;
 
+    public abstract void open() throws IOException;
 
-  @Override
-  /** Should also remove this object and update all affected objects in index. */
-  public abstract Set<OsmObject> remove(OsmObject osmObject);
+    public abstract void close() throws IOException;
 
-  @Override
-  /** Should also update this object and all affected objects in index. */
-  public abstract void add(OsmObject osmObject);
+    /**
+     * Commits and changes to the index and makes it available for queries.
+     *
+     * @throws IOException
+     */
+    public abstract void commit() throws IOException;
 
+    public abstract Map<OsmObject, Float> search(Query query) throws IOException;
 
-  /**
-   * Reconstructs the whole index from scratch.
-   *
-   * @param numberOfThreads number of threads used to write to index
-   */
-  public abstract void reconstruct(int numberOfThreads) throws IOException;
+    public Root getDecorated() {
+        return decorated;
+    }
 
-  public abstract void open() throws IOException;
-
-  public abstract void close() throws IOException;
-
-  /**
-   * Commits and changes to the index and makes it available for queries.
-   *
-   * @throws IOException
-   */
-  public abstract void commit() throws IOException;
-
-  public abstract Map<OsmObject, Float> search(Query query) throws IOException;
-
-  public Root getDecorated() {
-    return decorated;
-  }
-
-  public void setDecorated(Root decorated) {
-    this.decorated = decorated;
-  }
+    public void setDecorated(Root decorated) {
+        this.decorated = decorated;
+    }
 }
