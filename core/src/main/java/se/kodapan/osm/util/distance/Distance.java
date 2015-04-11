@@ -13,10 +13,11 @@ public abstract class Distance {
   }
 
   /**
-   * @param latitudeA
-   * @param longitudeA
-   * @param latitudeB
-   * @param longitudeB
+   * @param latitudeA  latitude of the point A
+   * @param longitudeA longitude of the point A
+   * @param latitudeB latitude of the point B
+   * @param longitudeB longitude of the point B
+     * @return distance Value
    */
   public abstract double calculate(double latitudeA, double longitudeA, double latitudeB, double longitudeB);
 

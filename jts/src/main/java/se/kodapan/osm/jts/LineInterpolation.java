@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Adds interpolated points along a line if distance between two points within it is too short.
- * <p/>
+ 
  * Not thread safe.
  *
  * @author kalle

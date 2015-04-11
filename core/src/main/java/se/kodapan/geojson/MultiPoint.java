@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Coordinates of a MultiPoint are an array of positions:
- * <p/>
+ 
  * <pre>
  * {
  *   "type": "MultiPoint",

@@ -1,0 +1,14 @@
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/parser/xml/instantiated/InstantiatedOsmXmlParserImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/lucene/query/CoordinateEnvelopeQueryFactory.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/ContainsTagKeyQueryFactoryImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/ContainsTagKeyAndValueQueryFactoryImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/QueryFactoriesImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/lucene/query/CoordinateCircleEnvelopeQueryFactory.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/NodeEnvelopeQueryFactoryImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/IndexedRootImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/ContainsTagValueQueryFactoryImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/NodeRadialEnvelopeQueryFactoryImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/parser/xml/streaming/StreamingOsmXmlParserImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/WayRadialEnvelopeQueryFactoryImpl.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/lucene/query/JSONQueryUnmarshaller.java
+/home/armando/Programas/workspaces/netbeans/osm-common/java/src/main/java/se/kodapan/osm/domain/root/indexed/WayEnvelopeQueryFactoryImpl.java

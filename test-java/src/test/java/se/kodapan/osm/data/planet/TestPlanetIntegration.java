@@ -21,7 +21,7 @@ import java.util.Date;
 
 /**
  * This test downloads a dump of malta since a few days back and then applies the changesets.
- * <p/>
+ 
  * todo this fails some days, that data i dump has a greater version than data in changeset.
  * todo is this due to osm-common not supporting such a feature (multiple changes merged to a single one in daily changeset?)
  * todo or is it due to geofrabrik not doing the right thing? probably not the latter.

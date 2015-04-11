@@ -144,16 +144,17 @@ public class ApiConnection {
   /**
    * HTTP status code 400 (Bad Request)
    * When any of the node/way/relation limits are crossed
-   * <p/>
+   * 
    * HTTP status code 509 (Bandwidth Limit Exceeded)
    * "Error: You have downloaded too much data. Please try again later." See Developer FAQ.
    *
-   * @param root
-   * @param south
-   * @param west
-   * @param north
-   * @param east
-   * @throws Exception
+   * @param root a Root class instance
+   * @param south double of south
+   * @param west double of west
+   * @param north double of north
+   * @param east double of east
+   * @return a osmxml with nodes
+   * @throws Exception a exception throwed whether can't create the instance
    */
   public InstantiatedOsmXmlParserDelta get(Root root, double south, double west, double north, double east) throws Exception {
 
@@ -182,8 +183,9 @@ public class ApiConnection {
   }
 
   /**
-   * @param comment
+   * @param comment comment to changeset
    * @return id of new changeset
+     * @throws java.lang.Exception exception throwed wheter can't create the changeset
    */
   public long createChangeset(String comment) throws Exception {
 

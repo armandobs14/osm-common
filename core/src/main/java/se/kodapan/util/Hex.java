@@ -2,7 +2,6 @@ package se.kodapan.util;
 
 /**
  * http://stackoverflow.com/questions/332079/in-java-how-do-i-convert-a-byte-array-to-a-string-of-hex-digits-while-keeping-l
- * <p/>
  * Created by kalle on 10/20/13.
  */
 public class Hex {

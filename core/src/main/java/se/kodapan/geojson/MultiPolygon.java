@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Coordinates of a MultiPolygon are an array of Polygon coordinate arrays:
- * <p/>
+ 
  * <pre>
  * {
  *   "type": "MultiPolygon",

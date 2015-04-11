@@ -64,9 +64,9 @@ public abstract class InstantiatedOsmXmlParser {
   /**
    * Overrides use to {@link #parse(java.io.Reader)}
    *
-   * @param xml
-   * @return
-   * @throws OsmXmlParserException
+   * @param xml a xml file to be parsed
+   * @return a parsed InstantiatedOsmXmlParserDelta
+   * @throws OsmXmlParserException a exception throwed wheter can't parse the xml
    */
   public final InstantiatedOsmXmlParserDelta parse(String xml) throws OsmXmlParserException {
     return parse(new StringReader(xml));
@@ -75,9 +75,9 @@ public abstract class InstantiatedOsmXmlParser {
   /**
    * Overrides use to {@link #parse(java.io.Reader)}
    *
-   * @param xml
-   * @return
-   * @throws OsmXmlParserException
+   * @param xml a xml file to be parsed
+   * @return a parsed InstantiatedOsmXmlParserDelta
+   * @throws OsmXmlParserException a exception throwed wheter can't parse the xml
    */
   public InstantiatedOsmXmlParserDelta parse(InputStream xml) throws OsmXmlParserException {
     try {
@@ -90,9 +90,9 @@ public abstract class InstantiatedOsmXmlParser {
   /**
    * Overrides use to {@link #parse(java.io.InputStream)}
    *
-   * @param xml
-   * @return
-   * @throws OsmXmlParserException
+   * @param xml a xml file to be parsed
+   * @return a parsed InstantiatedOsmXmlParserDelta
+   * @throws OsmXmlParserException a exception throwed wheter can't parse the xml
    */
   public InstantiatedOsmXmlParserDelta parse(Reader xml) throws OsmXmlParserException {
     return parse(new ReaderInputStream(xml, "utf8"));

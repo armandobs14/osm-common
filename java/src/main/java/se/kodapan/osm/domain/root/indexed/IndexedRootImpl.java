@@ -25,7 +25,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Implementation using Lucene 4.5.0.
- * <p/>
  * Created by kalle on 10/19/13.
  */
 public class IndexedRootImpl extends IndexedRoot<Query> {

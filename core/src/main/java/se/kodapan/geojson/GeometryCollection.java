@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Each element in the geometries array of a GeometryCollection is one of the geometry objects described above:
- * <p/>
+ 
  * <pre>
  * {
  *   "type": "GeometryCollection",

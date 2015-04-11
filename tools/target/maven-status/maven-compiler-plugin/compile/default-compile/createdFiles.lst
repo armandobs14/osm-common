@@ -1,0 +1,10 @@
+se/kodapan/osm/city/Classifier.class
+se/kodapan/osm/city/CachedInstanceFactory.class
+se/kodapan/osm/city/Color.class
+se/kodapan/osm/city/InstanceFactory.class
+se/kodapan/osm/city/Cell.class
+se/kodapan/osm/city/Palette.class
+se/kodapan/osm/city/Grid.class
+se/kodapan/osm/city/Instance.class
+se/kodapan/osm/city/EkonomiskaKartanInstanceFactory.class
+se/kodapan/osm/city/WekaClassifier.class

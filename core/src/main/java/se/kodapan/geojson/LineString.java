@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Coordinates of LineString are an array of positions (see 2.1.1. Positions):
- * <p/>
+ 
  * <pre>
  * {
  *   "type": "LineString",

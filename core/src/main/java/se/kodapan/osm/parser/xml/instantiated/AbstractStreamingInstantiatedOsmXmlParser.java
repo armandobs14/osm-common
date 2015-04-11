@@ -16,7 +16,7 @@ import java.text.ParseException;
 /**
  * An .osm.xml and .osc.xml parser
  * into a fully instantiated object graph.
- * <p/>
+ *
  * This class is not thread safe!
  *
  * @author kalle

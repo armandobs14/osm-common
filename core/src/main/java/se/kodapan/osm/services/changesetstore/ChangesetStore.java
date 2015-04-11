@@ -62,7 +62,7 @@ public class ChangesetStore extends HttpService {
    * @param sequenceNumber a sequence to be restrieved
    * @return a Reader instance
    * @see Reader
-   * @throws Exception
+   * @throws Exception exeption throwed whether can't retrieve the changeset
    */
   public Reader getChangeset(int sequenceNumber) throws Exception {
 

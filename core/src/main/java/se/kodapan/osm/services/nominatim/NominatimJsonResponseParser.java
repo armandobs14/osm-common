@@ -131,8 +131,9 @@ public class NominatimJsonResponseParser {
 
   /**
    * @param jsonObject instance of String, Number or null
-   * @param key
-   * @return
+   * @param key string with the key
+   * @return return a double
+   * @see Double
    */
   public static Double parseJsonDoubleValue(JSONObject jsonObject, String key) {
     Object value;

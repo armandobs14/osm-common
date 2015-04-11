@@ -8,9 +8,9 @@ import java.util.List;
 
 /**
  * Coordinates of a Polygon are an array of LinearRing coordinate arrays. The first element in the array represents the exterior ring. Any subsequent elements represent interior rings (or holes).
- * <p/>
+ 
  * No holes:
- * <p/>
+ 
  * <pre>
  * {
  *   "type": "Polygon",
@@ -19,9 +19,9 @@ import java.util.List;
  *   ]
  * }
  * </pre>
- * <p/>
+ 
  * With holes:
- * <p/>
+ 
  * <pre>
  * {
  *   "type": "Polygon",

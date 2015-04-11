@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Coordinates of a MultiLineString are an array of LineString coordinate arrays:
- * <p/>
+ 
  * <pre>
  * {
  *   "type": "MultiLineString",

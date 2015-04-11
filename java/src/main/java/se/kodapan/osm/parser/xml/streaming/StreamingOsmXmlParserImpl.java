@@ -14,7 +14,7 @@ import java.text.ParseException;
 
 /**
  * Parses .osm.xml files, but not .osc.xml files.
- * <p/>
+ 
  * This class is not thread safe!
  *
  * @author kalle

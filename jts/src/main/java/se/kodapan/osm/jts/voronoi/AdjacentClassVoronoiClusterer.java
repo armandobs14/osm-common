@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * Takes a number of points per class
  * and create polygons per class
  * joined together on class where adjacent with each other
- * <p/>
+ 
  * This could for instance be used to create polygons
  * that describe postal town and postal code limits.
  *

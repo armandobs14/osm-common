@@ -1,0 +1,4 @@
+se.kodapan.lucene.query
+se.kodapan.osm.domain.root.indexed
+se.kodapan.osm.parser.xml.instantiated
+se.kodapan.osm.parser.xml.streaming

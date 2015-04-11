@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * A GeoJSON object with the type "FeatureCollection" is a feature collection object.
- * <p/>
+ 
  * An object of type "FeatureCollection" must have a member with the name "features". The value corresponding to "features" is an array. Each element in the array is a feature object as defined above.
  *
  * @author kalle

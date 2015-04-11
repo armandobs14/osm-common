@@ -2,7 +2,7 @@ package se.kodapan.osm.util.distance;
 
 /**
  * True arc distance metrics, returning distance between coordinates in kilometers.
- * <p/>
+ * 
  * Based on code available in org.apache.lucene.spatial.base.LatLng.
  *
  * @author kalle
@@ -13,10 +13,10 @@ public class ArcDistance extends Distance {
   /**
    * copied from org.apache.lucene.spatial.base.LatLng
    *
-   * @param latitudeA
-   * @param longitudeA
-   * @param latitudeB
-   * @param longitudeB
+   * @param latitudeA  latitude of the point A
+   * @param longitudeA longitude of the point A
+   * @param latitudeB latitude of the point B
+   * @param longitudeB longitude of the point B
    * @return distance in kilometers
    */
   @Override

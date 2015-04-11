@@ -28,7 +28,7 @@ import java.util.concurrent.ExecutorService;
 
 /**
  * Implementation using Lucene 3.5.0.
- * <p/>
+ 
  * Created by kalle on 10/19/13.
  */
 public class IndexedRootImpl extends IndexedRoot<Query> {
