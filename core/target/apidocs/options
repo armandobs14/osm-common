@@ -1,0 +1,24 @@
+-classpath
+'/home/armando/Programas/workspaces/netbeans/osm-common/core/target/classes:/home/armando/.m2/repository/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar:/home/armando/.m2/repository/org/json/json/20090211/json-20090211.jar:/home/armando/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:/home/armando/.m2/repository/commons-io/commons-io/2.3/commons-io-2.3.jar:/home/armando/.m2/repository/org/apache/httpcomponents/httpcore/4.3.2/httpcore-4.3.2.jar:/home/armando/.m2/repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar:/home/armando/.m2/repository/org/apache/httpcomponents/httpclient/4.3.5/httpclient-4.3.5.jar:/home/armando/.m2/repository/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/home/armando/Programas/workspaces/netbeans/osm-common/core/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2015. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/home/armando/Programas/workspaces/netbeans/osm-common/core/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'core 0.0.3-SNAPSHOT API'
+-linkoffline
+'http://docs.oracle.com/javase/6/docs/api' '/home/armando/Programas/workspaces/netbeans/osm-common/core/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'core 0.0.3-SNAPSHOT API'
