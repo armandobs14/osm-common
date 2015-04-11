@@ -112,7 +112,7 @@ public abstract class IndexedRoot<Query> extends AbstractRoot {
      * Reconstructs the whole index from scratch.
      *
      * @param numberOfThreads number of threads used to write to index
-     * @throws IOException
+     * @throws IOException throws IOException wheter can't recontruct threads
      */
     public abstract void reconstruct(int numberOfThreads) throws IOException;
 
@@ -123,7 +123,7 @@ public abstract class IndexedRoot<Query> extends AbstractRoot {
     /**
      * Commits and changes to the index and makes it available for queries.
      *
-     * @throws IOException
+     * @throws IOException thows IOException whether can't commit
      */
     public abstract void commit() throws IOException;
 
