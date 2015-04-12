@@ -17,25 +17,28 @@ import java.io.Reader;
  */
 public class Nominatim extends HttpService {
 
-  public String search(String url) throws Exception {
+    public String search(String url) throws Exception {
 
-    leniency();
+        leniency();
 
-    HttpGet get = new HttpGet(url);
-    setUserAgent(get);
-    get.setHeader("Content-Encoding", "application/x-www-form-encoded");
-    HttpResponse response = getHttpClient().execute(get);
+        System.out.println(url);
 
-    String string;
-    Reader reader = new InputStreamReader(response.getEntity().getContent(), "UTF8");
-    try {
-      string = IOUtils.toString(reader);
-    } finally {
-      reader.close();
+        HttpGet get = new HttpGet(url);
+        setUserAgent(get);
+        get.setHeader("Content-Encoding", "application/x-www-form-encoded");
+        super.open();
+        HttpResponse response = getHttpClient().execute(get);
+
+        String string;
+        Reader reader = new InputStreamReader(response.getEntity().getContent(), "UTF8");
+        try {
+            string = IOUtils.toString(reader);
+        } finally {
+            reader.close();
+        }
+        System.out.println(string);
+        return string;
+
     }
-
-    return string;
-
-  }
 
 }

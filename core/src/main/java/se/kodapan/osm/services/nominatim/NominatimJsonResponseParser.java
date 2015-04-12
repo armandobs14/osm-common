@@ -21,141 +21,150 @@ import java.util.List;
  */
 public class NominatimJsonResponseParser {
 
-  private static final Logger log = LoggerFactory.getLogger(NominatimJsonResponseParser.class);
+    private static final Logger log = LoggerFactory.getLogger(NominatimJsonResponseParser.class);
 
-  private Root root = new PojoRoot();
+    private Root root = new PojoRoot();
 
-  public List<Result> search(Nominatim nominatim, NominatimQueryBuilder nominatimQueryBuilder) throws Exception {
-    return parse(nominatim.search(nominatimQueryBuilder.setFormat("json").build()));
-  }
-
-  public List<Result> parse(String nominatimJsonResponse) throws Exception {
-
-    JSONArray jsonResults = new JSONArray(nominatimJsonResponse);
-    List<Result> results = new ArrayList<Result>(jsonResults.length());
-
-    for (int i = 0; i < jsonResults.length(); i++) {
-      JSONObject jsonResult = (JSONObject) jsonResults.get(i);
-
-      Object osm_type = jsonResult.get("osm_type");
-      OsmObject existing;
-      long identity = parseJsonDoubleValue(jsonResult, "osm_id").longValue();
-
-      OsmObject object;
-      if ("node".equals(osm_type)) {
-        Node node = new Node();
-        node.setLatitude((parseJsonDoubleValue(jsonResult, "lat")));
-        node.setLongitude((parseJsonDoubleValue(jsonResult, "lon")));
-        object = node;
-        existing = root.getNode(identity);
-      } else if ("way".equals(osm_type)) {
-        Way way = new Way();
-        object = way;
-        existing = root.getWay(identity);
-      } else if ("relation".equals(osm_type)) {
-        Relation relation = new Relation();
-        object = relation;
-        existing = root.getRelation(identity);
-      } else {
-        throw new RuntimeException("Unknown osm_type: " + osm_type);
-      }
-
-      object.setId(identity);
-      object.setTag(
-          (String) jsonResult.get("class"),
-          (String) jsonResult.get("type"));
-
-      Result result = new Result(jsonResult, null);
-      result.setObject(existing != null ? existing : object);
-      results.add(result);
-      root.add(object);
+    public List<Result> search(Nominatim nominatim, NominatimQueryBuilder nominatimQueryBuilder) throws Exception {
+        String result = nominatim.search(nominatimQueryBuilder.setFormat("json").build());
+        return parse(result);
     }
 
+    public List<Result> parse(String nominatimJsonResponse) throws Exception {
+        JSONArray jsonResults = null;
+        if (nominatimJsonResponse.startsWith("{")) {
+            JSONObject result = new JSONObject(nominatimJsonResponse);
+            jsonResults = new JSONArray("[" + result.toString() + "]");
+        } else {
+            jsonResults = new JSONArray(nominatimJsonResponse);
+        }
+        List<Result> results = new ArrayList<>(jsonResults.length());
 
-    return results;
+        for (int i = 0; i < jsonResults.length(); i++) {
+            JSONObject jsonResult = (JSONObject) jsonResults.get(i);
 
-  }
+            Object osm_type = jsonResult.get("osm_type");
+            OsmObject existing;
+            long identity = parseJsonDoubleValue(jsonResult, "osm_id").longValue();
 
-  public Root getRoot() {
-    return root;
-  }
+            OsmObject object;
+            if ("node".equals(osm_type)) {
+                Node node = new Node();
+                node.setLatitude((parseJsonDoubleValue(jsonResult, "lat")));
+                node.setLongitude((parseJsonDoubleValue(jsonResult, "lon")));
+                object = node;
+                existing = root.getNode(identity);
+            } else if ("way".equals(osm_type)) {
+                Way way = new Way();
+                object = way;
+                existing = root.getWay(identity);
+            } else if ("relation".equals(osm_type)) {
+                Relation relation = new Relation();
+                object = relation;
+                existing = root.getRelation(identity);
+            } else {
+                throw new RuntimeException("Unknown osm_type: " + osm_type);
+            }
 
-  public void setRoot(Root root) {
-    this.root = root;
-  }
+            object.setId(identity);
 
-  public static class Result {
-    private JSONObject jsonObject;
-    private double importance;
-    private OsmObject object;
+            if (jsonResult.has("class") && jsonResult.has("type")) {
+                object.setTag(
+                        (String) jsonResult.get("class"),
+                        (String) jsonResult.get("type"));
+            }
 
-    public Result(JSONObject jsonObject, OsmObject object) {
-      this.jsonObject = jsonObject;
-      this.object = object;
-      this.importance = parseJsonDoubleValue(jsonObject, "importance");
+            Result result = new Result(jsonResult, object);
+            
+            result.setObject(existing != null ? existing : object);
+            results.add(result);
+            root.add(object);
+        }
+
+        return results;
+
     }
 
-    public double getImportance() {
-      return importance;
+    public Root getRoot() {
+        return root;
     }
 
-    public void setImportance(double importance) {
-      this.importance = importance;
+    public void setRoot(Root root) {
+        this.root = root;
     }
 
-    public OsmObject getObject() {
-      return object;
+    public static class Result {
+
+        private JSONObject jsonObject;
+        private Double importance;
+        private OsmObject object;
+
+        public Result(JSONObject jsonObject, OsmObject object) {
+            this.jsonObject = jsonObject;
+            this.object = object;
+            this.importance = parseJsonDoubleValue(jsonObject, "importance");
+        }
+
+        public Double getImportance() {
+            return importance;
+        }
+
+        public void setImportance(double importance) {
+            this.importance = importance;
+        }
+
+        public OsmObject getObject() {
+            return object;
+        }
+
+        public void setObject(OsmObject object) {
+            this.object = object;
+        }
+
+        public JSONObject getJsonObject() {
+            return jsonObject;
+        }
+
+        public void setJsonObject(JSONObject jsonObject) {
+            this.jsonObject = jsonObject;
+        }
+
+        @Override
+        public String toString() {
+            return "Result{"
+                    + "importance=" + importance
+                    + ", object=" + object
+                    + ", jsonObject=" + jsonObject
+                    + '}';
+        }
     }
 
-    public void setObject(OsmObject object) {
-      this.object = object;
-    }
+    /**
+     * @param jsonObject instance of String, Number or null
+     * @param key string with the key
+     * @return return a double
+     * @see Double
+     */
+    public static Double parseJsonDoubleValue(JSONObject jsonObject, String key) {
+        Object value;
+        try {
+            value = jsonObject.get(key);
+        } catch (JSONException e) {
+            return null;
+        }
+        if (value == null) {
+            return null;
+        }
 
-    public JSONObject getJsonObject() {
-      return jsonObject;
+        if (value instanceof Number) {
+            return ((Number) value).doubleValue();
+        }
+        try {
+            return Double.parseDouble(value.toString());
+        } catch (NumberFormatException e) {
+            log.error("Could not parse double from " + value.toString(), e);
+            return null;
+        }
     }
-
-    public void setJsonObject(JSONObject jsonObject) {
-      this.jsonObject = jsonObject;
-    }
-
-    @Override
-    public String toString() {
-      return "Result{" +
-          "importance=" + importance +
-          ", object=" + object +
-          ", jsonObject=" + jsonObject +
-          '}';
-    }
-  }
-
-  /**
-   * @param jsonObject instance of String, Number or null
-   * @param key string with the key
-   * @return return a double
-   * @see Double
-   */
-  public static Double parseJsonDoubleValue(JSONObject jsonObject, String key) {
-    Object value;
-    try {
-      value = jsonObject.get(key);
-    } catch (JSONException e) {
-      return null;
-    }
-    if (value == null) {
-      return null;
-    }
-
-
-    if (value instanceof Number) {
-      return ((Number) value).doubleValue();
-    }
-    try {
-      return Double.parseDouble(value.toString());
-    } catch (NumberFormatException e) {
-      log.error("Could not parse double from " + value.toString(), e);
-      return null;
-    }
-  }
 
 }
